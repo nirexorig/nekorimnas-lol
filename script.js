@@ -427,19 +427,24 @@ function initializeSteam() {
 async function loadSteamAvatar() {
     const steamAvatar = document.getElementById('steamAvatar');
 
-    // Попытка загрузить аватар через прокси или публичные данные
-    // Steam не позволяет прямой доступ без API ключа
-    // Используем заглушку с красивым Steam-style аватаром
+    // Попытка загрузить из assets (поддержка jpg и png)
+    const extensions = ['jpg', 'jpeg', 'png', 'gif'];
+    let loaded = false;
+
+    for (const ext of extensions) {
+        if (loaded) break;
+        const testImg = new Image();
+        testImg.onload = () => {
+            steamAvatar.src = `assets/steam-avatar.${ext}`;
+            loaded = true;
+        };
+        testImg.src = `assets/steam-avatar.${ext}`;
+    }
+
+    // Fallback на Steam CDN
     steamAvatar.onerror = () => {
         steamAvatar.src = 'https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg';
     };
-
-    // Пробуем загрузить из assets если есть
-    const testImg = new Image();
-    testImg.onload = () => {
-        steamAvatar.src = 'assets/steam-avatar.png';
-    };
-    testImg.src = 'assets/steam-avatar.png';
 }
 
 // ========================================
