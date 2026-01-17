@@ -531,11 +531,29 @@ function enterSite() {
     gate.classList.add('hidden');
     mainContainer.classList.add('visible');
 
+    // Автозапуск музыки после клика (важно для браузерной политики)
     if (CONFIG.music.autoplay && playlist.length > 0) {
         setTimeout(() => {
             loadTrack(0);
-            playMusic();
-        }, 500);
+
+            // Для видео-аудио нужно явно unmute
+            if (useVideoAudio) {
+                const bgVideo = document.getElementById('bgVideo');
+                bgVideo.muted = false;
+                bgVideo.volume = 1;
+                bgVideo.play().then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }).catch(err => {
+                    console.log('Video audio autoplay failed:', err);
+                    // Fallback - покажем кнопку play
+                    isPlaying = false;
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                });
+            } else {
+                playMusic();
+            }
+        }, 300);
     } else if (playlist.length > 0) {
         loadTrack(0);
     }
