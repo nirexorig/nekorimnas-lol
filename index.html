@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⋆ cisek ⋆</title>
+    <meta name="description" content="Personal profile page">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Гейт/Вход -->
+    <div class="gate" id="gate">
+        <div class="gate-content">
+            <div class="gate-symbol">々</div>
+            <p class="gate-text">click to enter</p>
+        </div>
+    </div>
+
+    <!-- Рамка свечения -->
+    <div class="border-glow"></div>
+
+    <!-- Фоновое изображение/видео -->
+    <div class="background-container" id="backgroundContainer">
+        <img src="assets/background.jpg" alt="" class="bg-image" id="bgImage">
+        <video muted loop class="bg-video" id="bgVideo" style="display: none;"></video>
+    </div>
+
+    <!-- Частицы снега -->
+    <div class="snow-container" id="snowContainer"></div>
+
+    <!-- Дождь -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <!-- CRT эффект -->
+    <div class="crt-overlay" id="crtOverlay"></div>
+
+    <!-- Шум/зернистость -->
+    <div class="noise-overlay" id="noiseOverlay"></div>
+
+    <!-- Кастомный курсор -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Основной контейнер -->
+    <main class="main-container" id="mainContainer">
+        <!-- Главная карточка профиля с 3D эффектом -->
+        <div class="profile-card" id="profileCard">
+            <div class="card-inner">
+                <!-- Верхняя секция с аватаром и био -->
+                <div class="card-header">
+                    <div class="avatar-section">
+                        <div class="avatar-wrapper">
+                            <img src="assets/avatar-decoration.gif" alt="" class="avatar-decoration"
+                                id="avatarDecoration">
+                            <img src="assets/avatar.gif" alt="Avatar" class="avatar" id="avatar">
+                        </div>
+                    </div>
+                    <div class="header-info">
+                        <div class="badges-row">
+                            <span class="badge diamond"><i class="fas fa-gem"></i></span>
+                            <span class="badge fire"><i class="fas fa-fire"></i></span>
+                        </div>
+                        <div class="bio-text">
+                            <span class="typewriter" id="typewriter"></span><span class="cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discord присутствие -->
+                <div class="discord-presence">
+                    <div class="presence-left">
+                        <div class="discord-avatar-wrapper">
+                            <img src="assets/avatar.gif" alt="" class="discord-avatar" id="discordAvatar">
+                            <span class="status-indicator" id="statusIndicator"></span>
+                        </div>
+                        <div class="discord-info">
+                            <div class="discord-name-row">
+                                <span class="discord-name" id="discordName">ksrv</span>
+                                <span class="clan-badge">
+                                    <img src="assets/clan-icon.png" alt="" id="clanIcon">
+                                    <span id="clanName">VAIN</span>
+                                </span>
+                            </div>
+                            <span class="discord-status" id="discordStatus">last seen 5 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="presence-right">
+                        <div class="server-widget">
+                            <img src="assets/server-icon.png" alt="" class="server-icon" id="serverIcon">
+                            <div class="server-info">
+                                <span class="server-name" id="serverName">cisek community</span>
+                                <div class="server-stats">
+                                    <span class="stat online"><span class="dot"></span> <span id="onlineCount">68</span>
+                                        Online</span>
+                                    <span class="stat members"><span class="dot"></span> <span
+                                            id="memberCount">370</span> Members</span>
+                                </div>
+                                <a href="#" class="join-btn" id="joinBtn">Join</a>
+                            </div>
+                        </div>
+                        <span class="widget-label"><i class="fab fa-discord"></i> Discord</span>
+                    </div>
+                </div>
+
+                <!-- Социальные иконки -->
+                <div class="social-icons" id="socialIcons">
+                    <!-- Заполняется из конфига -->
+                </div>
+
+                <!-- Нижняя статистика -->
+                <div class="bottom-stats">
+                    <div class="stat-item views">
+                        <i class="fas fa-eye"></i>
+                        <span id="viewCount">16,380</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="location">North Pole 𖢔𐂂</span>
+                    </div>
+                </div>
+
+                <!-- Музыкальный плеер -->
+                <div class="music-player" id="musicPlayer">
+                    <div class="music-title" id="musicTitle">Loading...</div>
+                    <div class="music-progress-row">
+                        <span class="time" id="currentTime">0:00</span>
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="time" id="totalTime">0:00</span>
+                    </div>
+                    <div class="music-controls">
+                        <button class="control-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
+                        <button class="control-btn play-btn" id="playBtn"><i class="fas fa-pause"></i></button>
+                        <button class="control-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Аудио элемент -->
+    <audio id="audioPlayer" preload="metadata"></audio>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

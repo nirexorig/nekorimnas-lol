@@ -1,0 +1,878 @@
+/* ========================================
+   CSS Variables - НАСТРОЙКИ
+   ======================================== */
+:root {
+    /* Основные цвета */
+    --accent-color: #00a8ff;
+    --accent-glow: rgba(0, 168, 255, 0.6);
+
+    /* Цвета фона */
+    --bg-primary: #0a0a0a;
+
+    /* Цвета текста */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.4);
+
+    /* Glassmorphism - более прозрачное */
+    --glass-bg: rgba(20, 20, 30, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --glass-blur: 25px;
+
+    /* Свечение рамки */
+    --border-glow-size: 100px;
+    --border-glow-opacity: 0.6;
+
+    /* Шрифты */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: none;
+}
+
+/* ========================================
+   Background
+   ======================================== */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.bg-image,
+.bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(70%) brightness(0.5);
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Скрывать сломанные изображения полностью */
+img[src=""],
+img:not([src]),
+img[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Скрыть alt текст для сломанных изображений */
+img:-moz-broken {
+    display: none !important;
+}
+
+img::before {
+    content: "";
+    display: block;
+}
+
+/* Скрыть пустые контейнеры после скрытия изображений */
+.avatar-decoration[style*="display: none"],
+.server-icon[style*="display: none"],
+.clan-badge img[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* ========================================
+   Border Glow - ОТКЛЮЧЕНО
+   ======================================== */
+.border-glow {
+    display: none;
+}
+
+/* ========================================
+   Custom Cursor
+   ======================================== */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 10000;
+    transition: transform 0.1s ease;
+}
+
+.custom-cursor::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 20px solid var(--accent-color);
+    transform: rotate(-45deg);
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.custom-cursor.clicking {
+    transform: scale(0.8);
+}
+
+/* ========================================
+   Gate Screen
+   ======================================== */
+.gate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: none;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.gate.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gate-content {
+    text-align: center;
+    animation: floatGate 3s ease-in-out infinite;
+}
+
+@keyframes floatGate {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.gate-symbol {
+    font-size: 80px;
+    color: var(--text-primary);
+    text-shadow: 0 0 40px var(--accent-glow);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.gate:hover .gate-symbol {
+    transform: scale(1.1);
+    text-shadow: 0 0 60px var(--accent-glow);
+}
+
+.gate-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   Snow Particles
+   ======================================== */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #fff;
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* ========================================
+   Rain Effect
+   ======================================== */
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 45;
+    overflow: hidden;
+}
+
+.raindrop {
+    position: absolute;
+    top: -50px;
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, transparent, rgba(174, 194, 224, 0.5));
+    animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* ========================================
+   CRT Effect
+   ======================================== */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.crt-overlay.enabled::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 3px;
+    pointer-events: none;
+}
+
+.crt-overlay.enabled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+}
+
+/* Scanline flicker */
+.crt-overlay.flicker::before {
+    animation: scanlineFlicker 0.1s infinite;
+}
+
+@keyframes scanlineFlicker {
+    0% {
+        opacity: 0.9;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.95;
+    }
+}
+
+/* ========================================
+   Noise/Grain Effect
+   ======================================== */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 199;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.noise-overlay.enabled {
+    animation: noiseAnim 0.5s infinite;
+}
+
+@keyframes noiseAnim {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-1%, -1%);
+    }
+
+    30% {
+        transform: translate(1%, 1%);
+    }
+
+    50% {
+        transform: translate(-1%, 1%);
+    }
+
+    70% {
+        transform: translate(1%, -1%);
+    }
+}
+
+/* ========================================
+   Main Container
+   ======================================== */
+.main-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.3s;
+    perspective: 1000px;
+}
+
+.main-container.visible {
+    opacity: 1;
+}
+
+/* ========================================
+   Profile Card - Glassmorphism + 3D Tilt
+   ======================================== */
+.profile-card {
+    width: 100%;
+    max-width: 420px;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+.card-inner {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    padding-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   Card Header - Avatar + Bio
+   ======================================== */
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.avatar-section {
+    flex-shrink: 0;
+    margin-top: 15px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: visible;
+}
+
+.avatar-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110px;
+    height: 110px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.header-info {
+    flex: 1;
+    padding-top: 10px;
+}
+
+.badges-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.badge {
+    font-size: 16px;
+    filter: drop-shadow(0 0 5px currentColor);
+}
+
+.badge.diamond {
+    color: #b3afaf;
+}
+
+.badge.fire {
+    color: #b3afaf;
+}
+
+.bio-text {
+    font-size: 17px;
+    font-weight: 570;
+    color: var(--text-primary);
+}
+
+.cursor {
+    color: var(--accent-color);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* ========================================
+   Discord Presence Widget
+   ======================================== */
+.discord-presence {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 15px;
+    border: 1px solid var(--glass-border);
+}
+
+.presence-left {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+}
+
+.discord-avatar-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.discord-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid rgba(30, 30, 40, 0.9);
+    background: #43b581;
+}
+
+.status-indicator.offline {
+    background: #747f8d;
+}
+
+.status-indicator.idle {
+    background: #faa61a;
+}
+
+.status-indicator.dnd {
+    background: #f04747;
+}
+
+.discord-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.discord-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.discord-name {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.clan-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.clan-badge img {
+    width: 14px;
+    height: 14px;
+}
+
+.discord-status {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.presence-right {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.server-widget {
+    display: flex;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 12px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.server-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.server-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.server-name {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.server-stats {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.server-stats .stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.server-stats .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #43b581;
+}
+
+.join-btn {
+    background: #43b581;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.join-btn:hover {
+    background: #3ca374;
+    transform: scale(1.05);
+}
+
+.widget-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* ========================================
+   Social Icons
+   ======================================== */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-icon img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.social-icon:hover img {
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+/* ========================================
+   Bottom Stats
+   ======================================== */
+.bottom-stats {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-item i {
+    font-size: 16px;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   Music Player
+   ======================================== */
+.music-player {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.music-title {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time {
+    font-size: 11px;
+    color: var(--text-muted);
+    min-width: 35px;
+}
+
+.time:last-child {
+    text-align: right;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--text-primary);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.control-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 18px;
+    cursor: none;
+    transition: all 0.2s ease;
+    padding: 8px;
+}
+
+.control-btn:hover {
+    transform: scale(1.2);
+    color: var(--accent-color);
+}
+
+.play-btn {
+    font-size: 22px;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 600px) {
+    .profile-card {
+        max-width: 100%;
+    }
+
+    .discord-presence {
+        flex-direction: column;
+    }
+
+    .presence-right {
+        align-items: flex-start;
+    }
+
+    .server-widget {
+        width: 100%;
+    }
+
+    .server-name {
+        max-width: 100%;
+    }
+}
+
+/* ========================================
+   Scrollbar
+   ======================================== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+}
