@@ -73,13 +73,12 @@ async function fetchDiscordPresence() {
 function applyDiscordData() {
     if (!discordData) return;
 
-    // Аватар Discord
-    const avatar = document.getElementById('avatar');
+    // Аватар Discord - только для маленькой карточки!
+    // Большой аватар остаётся assets/avatar.gif
     const discordAvatar = document.getElementById('discordAvatar');
 
     if (discordData.discord_user.avatar) {
         const avatarUrl = `https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}.${discordData.discord_user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`;
-        avatar.src = avatarUrl;
         discordAvatar.src = avatarUrl;
     }
 
