@@ -55,13 +55,22 @@ const CONFIG = {
     },
 
     // ========================================
-    // DISCORD СЕРВЕР
+    // МОИ УСЛУГИ (вместо Discord сервера)
     // ========================================
-    discord: {
-        serverName: 'Мои Услуги',
-        onlineCount: '68',
-        memberCount: '370',
-        inviteLink: 'https://funpay.com/uk/users/10857469/',
+    services: {
+        title: 'Мои Услуги',
+        subtitle: 'FunPay',
+        link: 'https://funpay.com/uk/users/10857469/',
+        buttonText: 'Перейти'
+    },
+
+    // ========================================
+    // STEAM ПРОФИЛЬ
+    // ========================================
+    steam: {
+        enabled: true,
+        profileUrl: 'https://steamcommunity.com/id/notnoptixv4/',
+        customId: 'notnoptixv4'
     },
 
     // ========================================

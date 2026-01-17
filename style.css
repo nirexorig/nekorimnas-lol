@@ -690,6 +690,177 @@ img::before {
 }
 
 /* ========================================
+   Services Widget (вместо Discord)
+   ======================================== */
+.services-widget {
+    align-items: center;
+}
+
+.services-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.services-icon i {
+    font-size: 20px;
+    color: white;
+}
+
+.services-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ========================================
+   Steam Section - Expandable Card
+   ======================================== */
+.steam-section {
+    width: 100%;
+}
+
+.steam-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.steam-toggle:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.steam-toggle i:first-child {
+    font-size: 18px;
+    color: #66c0f4;
+}
+
+.steam-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    font-size: 12px;
+}
+
+.steam-arrow.rotated {
+    transform: rotate(180deg);
+}
+
+.steam-card {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin 0.3s ease;
+    margin-top: 0;
+}
+
+.steam-card.open {
+    max-height: 300px;
+    margin-top: 10px;
+}
+
+.steam-content {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.steam-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.steam-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #66c0f4;
+}
+
+.steam-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.steam-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.steam-status {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.steam-status.online {
+    color: #57cbde;
+}
+
+.steam-status.in-game {
+    color: #90ba3c;
+}
+
+.steam-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.steam-stats .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.steam-stats .stat-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.steam-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
+    border-radius: 8px;
+    color: #66c0f4;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.steam-link:hover {
+    background: linear-gradient(135deg, #2a475e 0%, #3d6a8a 100%);
+    transform: scale(1.02);
+}
+
+/* ========================================
    Social Icons
    ======================================== */
 .social-icons {

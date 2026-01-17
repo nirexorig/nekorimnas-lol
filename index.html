@@ -92,20 +92,43 @@
                         </div>
                     </div>
                     <div class="presence-right">
-                        <div class="server-widget">
-                            <img src="assets/server-icon.png" alt="" class="server-icon" id="serverIcon">
+                        <!-- Виджет Услуг (вместо Discord) -->
+                        <div class="server-widget services-widget">
+                            <div class="services-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
                             <div class="server-info">
-                                <span class="server-name" id="serverName">cisek community</span>
-                                <div class="server-stats">
-                                    <span class="stat online"><span class="dot"></span> <span id="onlineCount">68</span>
-                                        Online</span>
-                                    <span class="stat members"><span class="dot"></span> <span
-                                            id="memberCount">370</span> Members</span>
-                                </div>
-                                <a href="#" class="join-btn" id="joinBtn">Join</a>
+                                <span class="server-name" id="servicesTitle">Мои Услуги</span>
+                                <span class="services-subtitle" id="servicesSubtitle">FunPay</span>
+                                <a href="#" class="join-btn" id="servicesBtn" target="_blank">Перейти</a>
                             </div>
                         </div>
-                        <span class="widget-label"><i class="fab fa-discord"></i> Discord</span>
+                    </div>
+                </div>
+
+                <!-- Steam карточка (раскрывающаяся) -->
+                <div class="steam-section" id="steamSection">
+                    <button class="steam-toggle" id="steamToggle">
+                        <i class="fab fa-steam"></i>
+                        <span>Steam Profile</span>
+                        <i class="fas fa-chevron-down steam-arrow" id="steamArrow"></i>
+                    </button>
+                    <div class="steam-card" id="steamCard">
+                        <div class="steam-content">
+                            <div class="steam-header">
+                                <img src="" alt="Steam Avatar" class="steam-avatar" id="steamAvatar">
+                                <div class="steam-info">
+                                    <span class="steam-name" id="steamName">Loading...</span>
+                                    <span class="steam-status" id="steamStatus">Offline</span>
+                                </div>
+                            </div>
+                            <div class="steam-stats" id="steamStats">
+                                <!-- Заполняется из JS -->
+                            </div>
+                            <a href="#" class="steam-link" id="steamLink" target="_blank">
+                                <i class="fab fa-steam"></i> Открыть профиль
+                            </a>
+                        </div>
                     </div>
                 </div>
 

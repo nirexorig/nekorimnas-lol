@@ -311,18 +311,30 @@ function initializeProfile() {
         document.getElementById('clanName').textContent = CONFIG.profile.clan;
     }
 
-    // Discord сервер
-    if (CONFIG.discord.serverName) {
-        document.getElementById('serverName').textContent = CONFIG.discord.serverName;
+    // Услуги (Services)
+    if (CONFIG.services) {
+        const servicesTitle = document.getElementById('servicesTitle');
+        const servicesSubtitle = document.getElementById('servicesSubtitle');
+        const servicesBtn = document.getElementById('servicesBtn');
+
+        if (servicesTitle && CONFIG.services.title) {
+            servicesTitle.textContent = CONFIG.services.title;
+        }
+        if (servicesSubtitle && CONFIG.services.subtitle) {
+            servicesSubtitle.textContent = CONFIG.services.subtitle;
+        }
+        if (servicesBtn) {
+            servicesBtn.href = CONFIG.services.link || '#';
+            servicesBtn.textContent = CONFIG.services.buttonText || 'Перейти';
+        }
     }
-    if (CONFIG.discord.onlineCount) {
-        document.getElementById('onlineCount').textContent = CONFIG.discord.onlineCount;
-    }
-    if (CONFIG.discord.memberCount) {
-        document.getElementById('memberCount').textContent = CONFIG.discord.memberCount;
-    }
-    if (CONFIG.discord.inviteLink) {
-        document.getElementById('joinBtn').href = CONFIG.discord.inviteLink;
+
+    // Steam
+    if (CONFIG.steam && CONFIG.steam.enabled) {
+        initializeSteam();
+    } else {
+        const steamSection = document.getElementById('steamSection');
+        if (steamSection) steamSection.style.display = 'none';
     }
 
     // Социальные ссылки
@@ -368,6 +380,66 @@ function applySocialLinks() {
 
         container.appendChild(a);
     });
+}
+
+// ========================================
+// Steam Profile
+// ========================================
+function initializeSteam() {
+    const steamToggle = document.getElementById('steamToggle');
+    const steamCard = document.getElementById('steamCard');
+    const steamArrow = document.getElementById('steamArrow');
+    const steamLink = document.getElementById('steamLink');
+    const steamAvatar = document.getElementById('steamAvatar');
+    const steamName = document.getElementById('steamName');
+    const steamStatus = document.getElementById('steamStatus');
+    const steamStats = document.getElementById('steamStats');
+
+    // Установить ссылку на профиль
+    if (steamLink && CONFIG.steam.profileUrl) {
+        steamLink.href = CONFIG.steam.profileUrl;
+    }
+
+    // Toggle функционал
+    steamToggle.addEventListener('click', () => {
+        steamCard.classList.toggle('open');
+        steamArrow.classList.toggle('rotated');
+    });
+
+    // Установить данные профиля (статические, так как Steam API требует ключ)
+    steamAvatar.src = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg`;
+    steamName.textContent = CONFIG.steam.customId || 'Steam User';
+    steamStatus.textContent = 'Click to view profile';
+
+    // Добавляем статистику-заглушку (можно расширить)
+    steamStats.innerHTML = `
+        <div class="stat">
+            <span class="stat-label">Profile</span>
+            <span class="stat-value">${CONFIG.steam.customId}</span>
+        </div>
+    `;
+
+    // Попробуем загрузить аватар через Steam
+    // Примечание: Для полной интеграции нужен Steam Web API ключ
+    loadSteamAvatar();
+}
+
+async function loadSteamAvatar() {
+    const steamAvatar = document.getElementById('steamAvatar');
+
+    // Попытка загрузить аватар через прокси или публичные данные
+    // Steam не позволяет прямой доступ без API ключа
+    // Используем заглушку с красивым Steam-style аватаром
+    steamAvatar.onerror = () => {
+        steamAvatar.src = 'https://avatars.cloudflare.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg';
+    };
+
+    // Пробуем загрузить из assets если есть
+    const testImg = new Image();
+    testImg.onload = () => {
+        steamAvatar.src = 'assets/steam-avatar.png';
+    };
+    testImg.src = 'assets/steam-avatar.png';
 }
 
 // ========================================
